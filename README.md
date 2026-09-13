@@ -1,1 +1,1 @@
-# Wdding-Vibe
+# Wedding-Vibe
