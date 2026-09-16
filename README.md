@@ -34,13 +34,28 @@ npm run preview
 
 ## How it works right now (Phase 1 — MVP)
 
-- No backend, no database. All the "which outfit fits which occasion/
-  community/vibe/age/relation" logic lives in
-  `src/data/outfitEngine.ts` as hand-written rules.
-- `src/data/shoppingLinks.ts` turns a suggestion into direct search-result
-  links on real shopping sites (`?q=` style search deep-links).
-- This is enough to demo the full user flow end-to-end and is 100% static,
-  so it's free to host.
+- No backend, no database — everything is static and free to host.
+- **Filter engine** (`src/data/outfitEngine.ts`): hand-written rules mapping
+  occasion × community × vibe × age × relation to garment types.
+- **Editor's Picks** (`src/data/looks.ts`): ~15 hand-curated looks for
+  specific real scenarios (a Gujarat garba night vs. a Mumbai sangeet,
+  close-family wedding looks, kids/teen picks, etc.), shown on the
+  `/trends` page alongside written trend notes per community
+  (`src/data/trendNotes.ts`).
+- **Look visuals** (`src/components/LookVisual.tsx`): original SVG
+  illustrations (colour palette + pattern + garment silhouette) generated
+  per look — not live retailer photos. See "What's real vs. what isn't" on
+  the `/about` page for why, and what replaces this later.
+- **Smart Match** (`src/lib/smartMatch.ts`): a free-text box that keyword-
+  matches a sentence like "Gujarati sangeet in Mumbai, trendy" into filters.
+  Explicitly labelled as keyword matching, not AI, until it's wired to a
+  real LLM (see roadmap).
+- **Saved looks** (`src/lib/wishlist.ts`): heart any look to save it to
+  `localStorage`, shared live across the whole app.
+- **Shopping links** (`src/data/shoppingLinks.ts`): each look expands into
+  direct search-result links on Myntra, Ajio, Nykaa Fashion, Kalki Fashion,
+  Mirraw, and Pinterest.
+- Multi-page app (`/`, `/trends`, `/saved`, `/about`) via `react-router-dom`.
 
 ## Roadmap
 
